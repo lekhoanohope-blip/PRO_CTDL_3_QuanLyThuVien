@@ -45,6 +45,12 @@ dòng cuối `Tong: 80 test, Pass: 80, Fail: 0` và thoát với mã `0`.
 
 ## Cách mở trên Visual Studio
 
+**Cách nhanh nhất (đã có sẵn solution):** mở file `QuanLyThuVienCpp.sln` trong
+thư mục gốc, nhấn **Ctrl+Shift+B** để build rồi **Ctrl+F5** để chạy — file
+`.vcxproj` đã gồm sẵn 8 file `.h` + 7 file `.cpp`, chuẩn C++17 và thư mục
+`include`. Lưu ý: project phải là **C++** (Empty Project, C++), không dùng
+project C# Console. Các bước thủ công dưới đây chỉ cần khi tạo project mới từ đầu.
+
 1. Mở Visual Studio, chọn **Create a new project → Empty Project**, đặt tên
    (ví dụ `QuanLyThuVien`), chọn vị trí là thư mục gốc của dự án.
 2. Chuột phải vào project trong **Solution Explorer → Add → Existing Item**,

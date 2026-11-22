@@ -26,6 +26,12 @@ public:
         return m_items.empty();
     }
 
+    /// Bi danh cua empty(), giu tuong thich voi khung K1
+    /// (smoke test Moc 1 dung isEmpty()).
+    bool isEmpty() const {
+        return empty();
+    }
+
     /// So ban ghi hien co trong kho.
     std::size_t size() const {
         return m_items.size();

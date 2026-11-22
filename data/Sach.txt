@@ -1,0 +1,8 @@
+S001|Lap trinh C++ co ban|Nguyen Van A|NXB Giao Duc|120000|2020|350|10/01/2024|0
+S002|Cau truc du lieu va giai thuat|Tran Thi B|NXB Khoa Hoc|150000|2021|420|15/02/2024|1
+S003|Nhap mon lap trinh Python|Le Van C|NXB Tre|99000|2022|300|20/03/2024|0
+S004|Co so du lieu SQL Server|Pham Van D|NXB Thong Ke|180000|2019|500|05/04/2023|2
+S005|Lap trinh huong doi tuong|Hoang Thi E|NXB Giao Duc|135000|2023|380|12/05/2024|0
+S006|Mang may tinh|Do Van F|NXB Khoa Hoc|165000|2020|450|18/06/2023|0
+S007|He dieu hanh|Bui Thi G|NXB Tre|145000|2021|400|22/07/2024|3
+S008|Tri tue nhan tao|Vu Van H|NXB Khoa Hoc|220000|2024|520|30/08/2024|0

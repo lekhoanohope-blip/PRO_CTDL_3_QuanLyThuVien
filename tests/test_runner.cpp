@@ -389,7 +389,7 @@ void testLibraryService() {
     readerContent += pastDate;
     readerContent += "\n";
     CHECK(writeTextFile((dataDir / "Admin.txt").string(),
-                        "admin|123456\nuser1|123456\n") &&
+                        "admin|123456\n") &&
               writeTextFile((dataDir / "Sach.txt").string(), bookContent) &&
               writeTextFile((dataDir / "BanDoc.txt").string(),
                             readerContent) &&

@@ -80,12 +80,11 @@ project C# Console. Các bước thủ công dưới đây chỉ cần khi tạo
 
 ## Tài khoản đăng nhập mẫu
 
-File `data/Admin.txt` có sẵn 2 tài khoản (mật khẩu đều là `123456`):
+File `data/Admin.txt` có sẵn 1 tài khoản (mật khẩu là `123456`):
 
 | User | Password | Ghi chú |
 |---|---|---|
 | `admin` | `123456` | Tài khoản quản trị chính |
-| `user1` | `123456` | Tài khoản nhân viên |
 
 Nhập sai 3 lần chương trình sẽ tự động thoát. Nhấn phím `ESC` khi đang gõ
 `User` hoặc `Password` cũng thoát ngay lập tức.

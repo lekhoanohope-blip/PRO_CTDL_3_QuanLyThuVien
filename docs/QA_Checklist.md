@@ -2,7 +2,7 @@
 
 Hướng dẫn dùng: chạy chương trình từ thư mục gốc, làm theo từng mục, đánh dấu
 `[x]` vào ô khi trường hợp đã cho kết quả đúng. Dữ liệu mẫu dùng để kiểm tra:
-`admin|123456`, `user1|123456`, sách `S001` (sẵn sàng), `S002` (đang mượn),
+`admin|123456`, sách `S001` (sẵn sàng), `S002` (đang mượn),
 bạn đọc `BD001`–`BD003`, phiếu `1`–`3` (đang mượn).
 
 ## 1. Chuẩn bị & môi trường
@@ -18,7 +18,6 @@ bạn đọc `BD001`–`BD003`, phiếu `1`–`3` (đang mượn).
 ## 2. Đăng nhập
 
 - [ ] Đăng nhập đúng `admin` / `123456` → vào được menu chính.
-- [ ] Đăng nhập đúng `user1` / `123456` → vào được menu chính.
 - [ ] Đăng nhập sai mật khẩu 1 lần → hiện thông báo lỗi, cho nhập lại.
 - [ ] Đăng nhập sai mật khẩu 3 lần liên tiếp → chương trình tự thoát,
       không còn cho nhập nữa.

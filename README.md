@@ -183,3 +183,5 @@ xóa, mượn, trả thì **ghi đè** toàn bộ file tương ứng.
 - Bộ kiểm thử tự động ghi dữ liệu tạm vào `build/test_data/` và xóa thư mục
   này mỗi lần chạy, **không động vào `data/` thật** nên chạy test bao nhiêu
   lần cũng an toàn.
+- Khi mượn/trả sách thành công, chương trình chạy một hiệu ứng ngắn (~1 giây):
+  quyển sách bay từ kệ tới bạn đọc (khi mượn) hoặc bay về kệ (khi trả).

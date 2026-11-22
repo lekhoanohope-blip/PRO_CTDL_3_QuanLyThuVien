@@ -418,6 +418,9 @@ void AppController::borrowBookFlow() {
     int soPhieuMuon = 0;
     const ServiceResult result = m_service.borrowBook(maSach, maBanDoc, soPhieuMuon);
     if (result.success) {
+        const Book* book = m_service.findBookByCode(maSach);
+        ConsoleUI::playBorrowAnimation(book == nullptr ? std::string()
+                                                       : book->getTenSach());
         ConsoleUI::printSuccess("Muon sach thanh cong. So phieu muon: " +
                                 std::to_string(soPhieuMuon));
     } else {
@@ -435,8 +438,21 @@ void AppController::returnBookFlow() {
         ConsoleUI::printInfo("Da huy thao tac tra sach.");
         return;
     }
+    // Lay ten sach truoc khi tra de hieu ung hien dung ten (sau khi tra
+    // phieu van con trong danh sach nhung tim truoc cho ro rang).
+    std::string tenSach;
+    for (const Loan& loan : m_service.getAllLoans()) {
+        if (loan.getSoPhieuMuon() == soPhieuMuon) {
+            const Book* book = m_service.findBookByCode(loan.getMaSach());
+            if (book != nullptr) {
+                tenSach = book->getTenSach();
+            }
+            break;
+        }
+    }
     const ServiceResult result = m_service.returnBook(soPhieuMuon);
     if (result.success) {
+        ConsoleUI::playReturnAnimation(tenSach);
         ConsoleUI::printSuccess(result.message);
     } else {
         ConsoleUI::printError(result.message);

@@ -1,9 +1,11 @@
 #include "ConsoleUI.h"
 
+#include <chrono>
 #include <cstdio>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 #ifdef _WIN32
@@ -67,6 +69,53 @@ void printSeparator(const std::vector<int>& widths) {
     }
     totalWidth += 3 * (static_cast<int>(widths.size()) - 1);
     std::cout << std::string(static_cast<std::size_t>(totalWidth), '-') << '\n';
+}
+
+// So khung hinh cua hieu ung muon/tra sach.
+constexpr int ANIMATION_FRAMES = 6;
+// Thoi gian dung (ms) giua hai khung hinh lien tiep.
+constexpr int ANIMATION_FRAME_DELAY_MS = 150;
+// Buoc dich ngang (so cot) cua quyen sach giua hai khung hinh.
+constexpr int ANIMATION_STEP_COLUMNS = 7;
+// Do rong cua phan chu ben trong quyen sach (khong tinh vien hai ben).
+constexpr int ANIMATION_BOOK_INNER_WIDTH = 11;
+// Do rong toi da cua ten sach in giua quyen sach.
+constexpr std::size_t ANIMATION_TITLE_WIDTH = 9;
+
+/// Tam dung thuc thi trong so mili giay cho truoc (khong doc phim).
+void sleepMs(int milliseconds) {
+#ifdef _WIN32
+    Sleep(static_cast<DWORD>(milliseconds));
+#else
+    std::this_thread::sleep_for(std::chrono::milliseconds(milliseconds));
+#endif
+}
+
+/// Ve quyen sach ASCII rong 13 ky tu tai cot offset, ten sach in o dong giua.
+void drawBook(int offset, const std::string& title) {
+    const std::string pad(static_cast<std::size_t>(offset), ' ');
+    const std::string label = fitText(title, ANIMATION_TITLE_WIDTH);
+    const std::string top =
+        " " + std::string(ANIMATION_BOOK_INNER_WIDTH, '_') + " ";
+    const std::string empty =
+        "|" + std::string(ANIMATION_BOOK_INNER_WIDTH, ' ') + "|";
+    const std::string bottom =
+        "|" + std::string(ANIMATION_BOOK_INNER_WIDTH, '_') + "|";
+    std::cout << pad << top << '\n'
+              << pad << empty << '\n'
+              << pad << "|" << ' ' << std::left
+              << std::setw(static_cast<int>(ANIMATION_TITLE_WIDTH)) << label
+              << " |\n"
+              << pad << empty << '\n'
+              << pad << bottom << '\n';
+    std::cout << std::right;
+}
+
+/// Ve ke sach tinh dung duoi hieu ung tra sach.
+void drawShelf() {
+    std::cout << "  ________________________________________\n"
+              << " | [SACH] [     ] [     ] [     ] [     ] |\n"
+              << " |________________________________________|\n";
 }
 
 }  // namespace
@@ -167,6 +216,56 @@ void ConsoleUI::printWarning(const std::string& message) {
 
 void ConsoleUI::printInfo(const std::string& message) {
     std::cout << message << '\n';
+}
+
+void ConsoleUI::playBorrowAnimation(const std::string& tenSach) {
+    for (int frame = 0; frame < ANIMATION_FRAMES; ++frame) {
+        clearScreen();
+        printHeader("MUON SACH");
+        setColor(ConsoleColor::Yellow);
+        drawBook(frame * ANIMATION_STEP_COLUMNS, tenSach);
+        resetColor();
+        std::cout << '\n';
+        std::cout << "KE SACH  ---------------------->  BAN DOC\n";
+        std::cout << "Dang xuat phieu muon"
+                  << std::string(static_cast<std::size_t>(frame % 3) + 1, '.')
+                  << '\n'
+                  << std::flush;
+        sleepMs(ANIMATION_FRAME_DELAY_MS);
+    }
+    clearScreen();
+    printHeader("MUON SACH");
+    setColor(ConsoleColor::Yellow);
+    drawBook((ANIMATION_FRAMES - 1) * ANIMATION_STEP_COLUMNS, tenSach);
+    resetColor();
+    std::cout << '\n';
+    std::cout << "KE SACH  ---------------------->  BAN DOC\n";
+    std::cout << "Sach da den tay ban doc!\n";
+}
+
+void ConsoleUI::playReturnAnimation(const std::string& tenSach) {
+    for (int frame = 0; frame < ANIMATION_FRAMES; ++frame) {
+        clearScreen();
+        printHeader("TRA SACH");
+        setColor(ConsoleColor::Cyan);
+        drawBook((ANIMATION_FRAMES - 1 - frame) * ANIMATION_STEP_COLUMNS, tenSach);
+        resetColor();
+        std::cout << '\n';
+        drawShelf();
+        std::cout << "Dang cat sach len ke"
+                  << std::string(static_cast<std::size_t>(frame % 3) + 1, '.')
+                  << '\n'
+                  << std::flush;
+        sleepMs(ANIMATION_FRAME_DELAY_MS);
+    }
+    clearScreen();
+    printHeader("TRA SACH");
+    setColor(ConsoleColor::Cyan);
+    drawBook(0, tenSach);
+    resetColor();
+    std::cout << '\n';
+    drawShelf();
+    std::cout << "Sach da ve ke!\n";
 }
 
 void ConsoleUI::pause() {

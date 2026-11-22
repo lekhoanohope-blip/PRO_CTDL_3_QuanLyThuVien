@@ -50,6 +50,14 @@ public:
     /// @param message Noi dung thong bao.
     static void printInfo(const std::string& message);
 
+    /// @brief Hieu ung quyen sach bay tu ke toi ban doc khi muon sach thanh cong.
+    /// @param tenSach Ten sach vua muon, in o giua quyen sach (cat ngan neu dai).
+    static void playBorrowAnimation(const std::string& tenSach);
+
+    /// @brief Hieu ung quyen sach bay tro ve ke khi tra sach thanh cong.
+    /// @param tenSach Ten sach vua tra, in o giua quyen sach (cat ngan neu dai).
+    static void playReturnAnimation(const std::string& tenSach);
+
     /// @brief Tam dung man hinh cho toi khi nguoi dung nhan mot phim bat ky.
     static void pause();
 
